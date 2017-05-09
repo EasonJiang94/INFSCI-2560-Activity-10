@@ -1,15 +1,15 @@
 // server.js
 // where your node app starts
 
-// set up twitter passport for oauth
+// set up github passport for oauth
 // see https://github.com/jaredhanson/passport-twitter
 var passport = require('passport');
 var GithubStrategy = require('passport-github').Strategy;
 
 // the process.env values are set in .env
 passport.use(new GithubStrategy({
-  consumerKey: process.env.GITHUB_CLIENT_ID,
-  consumerSecret: process.env.GITHUB_CLIENT_SECRET,
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: process.env.GITHUB_CALLBACK_URL,
 },
 function(token, tokenSecret, profile, cb) {
@@ -51,7 +51,7 @@ app.get('/logoff',
   }
 );
 
-app.get('/auth/github', passport.authenticate('twitter'));
+app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/login/github/return', 
   passport.authenticate('github', 

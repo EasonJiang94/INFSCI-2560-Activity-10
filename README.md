@@ -1,18 +1,9 @@
-Twitter Passport Example
+GitHub Passport Example
 ========================
 
-This app is a building block for using Twitter OAuth using [passport-twitter](https://github.com/jaredhanson/passport-twitter). You will need to [create a Twitter app](https://apps.twitter.com/app/new) to obtain the keys for the `.env` variables.
+This app is a remix of the [Twitter Passport Example](https://glitch.com/~twitter-passport-example), modified for use with GitHub's oauth.
 
-## Screenshots
-
-The index page at `/` has a link to log in via Twitter
-
-![log in page](https://cdn.glitch.com/06290abf-71bb-4336-9447-5364c4b2b6d6%2Findex.png)
-
-On successful authentication, a cookie is set and you're redirected to `/success`
-![successful authentication](https://cdn.glitch.com/06290abf-71bb-4336-9447-5364c4b2b6d6%2Fsuccess.png)
-
-When clicking the log off link, the cookie is deleted and you're redirected to back to the index page at `/`
+To bring your own remix to life, you'll need to visit GitHub's [app registration](https://github.com/settings/applications/new) page to create a new oauth app, then place the resulting ClientID, ClientSecret, and redirectUrl into the .env file.
 
 ## View the Code
 
