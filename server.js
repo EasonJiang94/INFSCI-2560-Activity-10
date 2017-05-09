@@ -4,13 +4,13 @@
 // set up twitter passport for oauth
 // see https://github.com/jaredhanson/passport-twitter
 var passport = require('passport');
-var TwitterStrategy = require('passport-twitter').Strategy;
+var GithubStrategy = require('passport-github').Strategy;
 
 // the process.env values are set in .env
-passport.use(new TwitterStrategy({
-  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: process.env.TWITTER_CALLBACK_URL,
+passport.use(new GithubStrategy({
+  consumerKey: process.env.GITHUB_CLIENT_ID,
+  consumerSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK_URL,
 },
 function(token, tokenSecret, profile, cb) {
   return cb(null, profile);
@@ -34,7 +34,7 @@ var cookieParser = require('cookie-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static('public'));
-app.use(expressSession({ secret:'watchingferries', resave: true, saveUninitialized: true }));
+app.use(expressSession({ secret:'observingboats', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,15 +46,15 @@ app.get('/', function(req, res) {
 // on clicking "logoff" the cookie is cleared
 app.get('/logoff',
   function(req, res) {
-    res.clearCookie('twitter-passport-example');
+    res.clearCookie('github-passport-example');
     res.redirect('/');
   }
 );
 
-app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/github', passport.authenticate('twitter'));
 
-app.get('/login/twitter/return', 
-  passport.authenticate('twitter', 
+app.get('/login/github/return', 
+  passport.authenticate('github', 
     { successRedirect: '/setcookie', failureRedirect: '/' }
   )
 );
@@ -63,7 +63,7 @@ app.get('/login/twitter/return',
 // to the success view
 app.get('/setcookie',
   function(req, res) {
-    res.cookie('twitter-passport-example', new Date());
+    res.cookie('github-passport-example', new Date());
     res.redirect('/success');
   }
 );
@@ -71,7 +71,7 @@ app.get('/setcookie',
 // if cookie exists, success. otherwise, user is redirected to index
 app.get('/success',
   function(req, res) {
-    if(req.cookies['twitter-passport-example']) {
+    if(req.cookies['github-passport-example']) {
       res.sendFile(__dirname + '/views/success.html');
     } else {
       res.redirect('/');
