@@ -10,7 +10,7 @@ var GithubStrategy = require('passport-github').Strategy;
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: process.env.GITHUB_CALLBACK_URL,
+  callbackURL: 'https://'+process.env.PROJECT_NAME+'.glitch.me/login/github/return',
 },
 function(token, tokenSecret, profile, cb) {
   return cb(null, profile);
