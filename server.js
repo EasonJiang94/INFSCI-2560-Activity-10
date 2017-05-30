@@ -61,7 +61,7 @@ app.get('/login/github/return',
 
 // on successful auth, a cookie is set before redirecting
 // to the success view
-app.get('/setcookie',
+app.get('/setcookie', requireLogin,
   function(req, res) {
     if(req.get('Referrer') && req.get('Referrer').indexOf(process.env.PROJECT_NAME)!=-1){
       res.cookie('github-passport-example', new Date());
@@ -73,7 +73,7 @@ app.get('/setcookie',
 );
 
 // if cookie exists, success. otherwise, user is redirected to index
-app.get('/success',
+app.get('/success', requireLogin,
   function(req, res) {
     if(req.cookies['github-passport-example']) {
       res.sendFile(__dirname + '/views/success.html');
@@ -82,6 +82,14 @@ app.get('/success',
     }
   }
 );
+
+function requireLogin (req, res, next) {
+  if (!req.user) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+};
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
