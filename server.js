@@ -63,8 +63,12 @@ app.get('/login/github/return',
 // to the success view
 app.get('/setcookie',
   function(req, res) {
-    res.cookie('github-passport-example', new Date());
-    res.redirect('/success');
+    if(req.get('Referrer') && req.get('Referrer').indexOf(process.env.PROJECT_NAME)!=-1){
+      res.cookie('github-passport-example', new Date());
+      res.redirect('/success');
+    } else {
+       res.redirect('/');
+    }
   }
 );
 
