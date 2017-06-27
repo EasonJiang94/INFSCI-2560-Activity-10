@@ -10,7 +10,7 @@ var GithubStrategy = require('passport-github').Strategy;
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: 'https://'+process.env.PROJECT_NAME+'.glitch.me/login/github/return',
+  callbackURL: 'https://'+process.env.PROJECT_DOMAIN+'.glitch.me/login/github/return',
 },
 function(token, tokenSecret, profile, cb) {
   return cb(null, profile);
@@ -63,7 +63,7 @@ app.get('/login/github/return',
 // to the success view
 app.get('/setcookie', requireLogin,
   function(req, res) {
-    if(req.get('Referrer') && req.get('Referrer').indexOf(process.env.PROJECT_NAME)!=-1){
+    if(req.get('Referrer') && req.get('Referrer').indexOf(process.env.PROJECT_DOMAIN)!=-1){
       res.cookie('github-passport-example', new Date());
       res.redirect('/success');
     } else {
