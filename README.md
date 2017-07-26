@@ -3,8 +3,6 @@ GitHub Passport Example
 
 An example app implementing Github OAuth with Passport.js.
 
-This app is a remix of the [Twitter Passport Example](https://glitch.com/~twitter-passport-example), modified for use with GitHub's OAuth.
-
 ## Getting Started
 
 To bring your own remix to life, you'll need to visit GitHub's [app registration](https://github.com/settings/applications/new) page to create a new oauth app, and use `https://{your-remix}.glitch.me/login/github/return` as the Authorization callback URL.  Once you've done this, place the resulting ClientID and ClientSecret into the `.env` file. 
