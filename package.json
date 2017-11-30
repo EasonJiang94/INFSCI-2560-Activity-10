@@ -23,5 +23,6 @@
     "github",
     "oauth",
     "passport"
-  ]
+  ],
+  "license": "MIT"
 }
