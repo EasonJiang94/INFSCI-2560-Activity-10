@@ -1,5 +1,5 @@
 dependencies:
-  body-parser: 1.18.2
+  connect-ensure-login: 0.1.1
   cookie-parser: 1.4.3
   express: 4.16.3
   express-session: 1.15.6
@@ -42,6 +42,12 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=
+  /connect-ensure-login/0.1.1:
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-F03MUSQ7nqwj+NmCFa62aU4uihI=
   /content-disposition/0.5.2:
     dev: false
     engines:
@@ -471,7 +477,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 4
 shrinkwrapVersion: 3
 specifiers:
-  body-parser: ^1.16.1
+  connect-ensure-login: ^0.1.1
   cookie-parser: ^1.4.3
   express: ^4.14.1
   express-session: ^1.15.1

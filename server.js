@@ -53,50 +53,18 @@ app.get('/logoff',
 app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/login/github/return', 
-  passport.authenticate('github', 
-    { successRedirect: '/setcookie', failureRedirect: '/' }
-  )
-);
-
-// on successful auth, a cookie is set before redirecting
-// to the success view
-app.get('/setcookie', requireUser,
+  passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
-    if(req.get('Referrer') && req.get('Referrer').indexOf(process.env.PROJECT_DOMAIN)!=-1){
-      res.cookie('github-passport-example', new Date());
-      res.redirect('/success');
-    } else {
-       res.redirect('/');
-    }
+    res.redirect('/success');
   }
 );
 
-// if cookie exists, success. otherwise, user is redirected to index
-app.get('/success', requireLogin,
-  function(req, res) {
-    if(req.cookies['github-passport-example']) {
-      res.sendFile(__dirname + '/views/success.html');
-    } else {
-      res.redirect('/');
-    }
-  }
-);
-
-function requireLogin (req, res, next) {
-  if (!req.cookies['github-passport-example']) {
-    res.redirect('/');
-  } else {
-    next();
-  }
-};
-
-function requireUser (req, res, next) {
-  if (!req.user) {
-    res.redirect('/');
-  } else {
-    next();
-  }
-};
+app.get('/success',
+  require('connect-ensure-login').ensureLoggedIn('/'),
+  function(req, res){
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.sendFile(__dirname + '/views/success.html');
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
