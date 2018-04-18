@@ -1,11 +1,12 @@
-// server.js
-// where your node app starts
-
-// set up github passport for oauth
-// see https://github.com/jaredhanson/passport-twitter
+var express = require('express');
 var passport = require('passport');
 var GithubStrategy = require('passport-github').Strategy;
 
+// OAuth 1.0-based strategies require a `verify` function which receives the
+// credentials for accessing the API on the
+// user's behalf, along with the user's profile.  The function must invoke `cb`
+// with a user object, which will be set at `req.user` in route handlers after
+// authentication.
 // the process.env values are set in .env
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
@@ -22,19 +23,17 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// init project
-var express = require('express');
+// Create a new Express application.
 var app = express();
-var expressSession = require('express-session');
 
-// cookies are used to save authentication
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(express.static('public'));
-app.use(expressSession({ secret:'observingboats', resave: true, saveUninitialized: true, maxAge: (90 * 24 * 3600000) }));
+// Initialize Passport and restore authentication state, if any, from the
+// session.
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,7 +45,7 @@ app.get('/', function(req, res) {
 // on clicking "logoff" the cookie is cleared
 app.get('/logoff',
   function(req, res) {
-    res.clearCookie('github-passport-example');
+    req.session.destroy();
     res.redirect('/');
   }
 );
