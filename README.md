@@ -1,11 +1,17 @@
-GitHub Passport Example
+INFSCI 2560 Activity 9
 ========================
 
-An example app implementing Github OAuth with Passport.js.
+Implementing authentication Github OAuth with Passport.js.
 
 ## Getting Started
 
-To bring your own remix to life, you'll need to visit GitHub's [app registration](https://github.com/settings/applications/new) page to create a new oauth app, and use `https://{your-remix}.glitch.me/login/github/return` as the Authorization callback URL.  Once you've done this, place the resulting ClientID and ClientSecret into the `.env` file. 
+1. Remix this app
+2. Create an application on Github's app registration](https://github.com/settings/applications/new) page
+3. Use `https://{your-remix}.glitch.me` as the Homepage URL
+4. Use `https://{your-remix}.glitch.me/login/github/return` as the Authorization callback URL
+5. Once you have created the app you will see the *Client ID* and *Client Secret* tokens. Copy those into your `.env` file.
+6. Visit the site at https://{your-remix}.glitch.me and click the "Log In with GitHub" link. It should take you to Github (assuming you have a Github account, which you will need)
+
 
 ## View the Code
 
@@ -15,11 +21,10 @@ On the back-end,
 - app secrets are safely stored in `.env`
 
 On the front-end,
-- edit `index.html` and `success.html`
-- drag in `assets`, like images or music, to add them to your project
+- The unauthenticated page is `index.html` and users will see `success.html` once they log in
 
 
-Made by Fog Creek
+Made by Matt Burton and Fog Creek
 -----------------
 
 \ ゜o゜)ノ
