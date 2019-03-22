@@ -6,7 +6,7 @@ Implementing authentication Github OAuth with Passport.js.
 ## Getting Started
 
 1. Remix this app
-2. Create an application on Github's app registration](https://github.com/settings/applications/new) page
+2. Create an application on Github's [app registration](https://github.com/settings/applications/new) page
 3. Use `https://{your-remix}.glitch.me` as the Homepage URL
 4. Use `https://{your-remix}.glitch.me/login/github/return` as the Authorization callback URL
 5. Once you have created the app you will see the *Client ID* and *Client Secret* tokens. Copy those into your `.env` file.
