@@ -1,4 +1,4 @@
-INFSCI 2560 Activity 9
+INFSCI 2560 Activity 10
 ========================
 
 Implementing authentication Github OAuth with Passport.js.
