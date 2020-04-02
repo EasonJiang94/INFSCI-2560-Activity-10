@@ -11,7 +11,7 @@ Implementing authentication Github OAuth with Passport.js.
 4. Use `https://{your-remix}.glitch.me/login/github/return` as the Authorization callback URL
 5. Once you have created the app you will see the *Client ID* and *Client Secret* tokens. Copy those into your `.env` file.
 6. Visit the site at https://{your-remix}.glitch.me and click the "Log In with GitHub" link. It should take you to Github (assuming you have a Github account, which you will need)
-7. Submit the Glitch Project page to Courseweb so we can try logging into your app ourselves!
+7. Submit the Glitch Project page to Canvas so we can try logging into your app ourselves!
 
 
 ## Check out the Code
