@@ -10,6 +10,8 @@ passport.use(new GithubStrategy({
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: 'https://' + process.env.PROJECT_DOMAIN + '.glitch.me/login/github/return',
 },
+
+
 function(token, tokenSecret, profile, cb) {
   // Here you could store the profile in a database if you need to
   return cb(null, profile);  // Use the GitHub profile as the user object
