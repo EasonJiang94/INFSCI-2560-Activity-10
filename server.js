@@ -33,7 +33,7 @@ var app = express();
 
 // Use application-level middleware for common functionality, including session handling
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
+//app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,  // Set to false to avoid re-saving unchanged sessions
